@@ -1,0 +1,12 @@
+# Conf
+*.conf
+*.ini
+*.yaml
+*.toml
+
+# Python
+*.pyc
+.pytest_cache
+./tests/.pytest_cache
+*.db
+*.json
