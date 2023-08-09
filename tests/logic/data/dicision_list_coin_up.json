@@ -1,0 +1,26 @@
+[
+    {
+        "id": 0,
+        "ccy": "DOT",
+        "usd": 0.005,
+        "time_unix": 5
+    },
+    {
+        "id": 0,
+        "ccy": "DOT",
+        "usd": 4,
+        "time_unix": 5
+    },
+    {
+        "id": 0,
+        "ccy": "DOT",
+        "usd": 25,
+        "time_unix": 5
+    },
+    {
+        "id": 0,
+        "ccy": "DOT",
+        "usd": 5,
+        "time_unix": 5
+    }
+]

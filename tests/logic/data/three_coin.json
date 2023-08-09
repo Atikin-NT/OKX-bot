@@ -1,0 +1,87 @@
+{
+    "code": "0",
+    "data": [
+        {
+            "ordId": "5584580",
+            "ccy": "DOT",
+            "productId": "1486",
+            "state": "1",
+            "protocol": "Regular interest",
+            "protocolType": "STAKING",
+            "term": "3",
+            "apy": "0.058",
+            "investData": [
+                {
+                    "ccy": "DOT",
+                    "amt": "0.19004047"
+                }
+            ],
+            "earningData": [
+                {
+                    "ccy": "DOT",
+                    "earningType": "1",
+                    "earnings": "0.00021133"
+                }
+            ],
+            "purchasedTime": "1690831797000",
+            "tag": "",
+            "estSettlementTime": "",
+            "cancelRedemptionDeadline": ""
+        },
+        {
+            "ordId": "5544530",
+            "ccy": "MATIC",
+            "productId": "1696",
+            "state": "1",
+            "protocol": "Regular interest",
+            "protocolType": "STAKING",
+            "term": "30",
+            "apy": "0.0487",
+            "investData": [
+                {
+                    "ccy": "MATIC",
+                    "amt": "1.49517613"
+                }
+            ],
+            "earningData": [
+                {
+                    "ccy": "MATIC",
+                    "earningType": "1",
+                    "earnings": "0.00299235"
+                }
+            ],
+            "purchasedTime": "1690135136000",
+            "tag": "",
+            "estSettlementTime": "",
+            "cancelRedemptionDeadline": ""
+        },
+        {
+            "ordId": "5544525",
+            "ccy": "NYM",
+            "productId": "2048",
+            "state": "1",
+            "protocol": "Regular interest",
+            "protocolType": "STAKING",
+            "term": "30",
+            "apy": "0.1802",
+            "investData": [
+                {
+                    "ccy": "NYM",
+                    "amt": "12.45016778"
+                }
+            ],
+            "earningData": [
+                {
+                    "ccy": "NYM",
+                    "earningType": "1",
+                    "earnings": "0.09219945"
+                }
+            ],
+            "purchasedTime": "1690135063000",
+            "tag": "",
+            "estSettlementTime": "",
+            "cancelRedemptionDeadline": ""
+        }
+    ],
+    "msg": ""
+}

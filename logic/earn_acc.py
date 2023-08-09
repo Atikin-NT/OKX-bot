@@ -14,6 +14,8 @@ class EarnAcc(BaseLogic):
         self.time_unix = time.time()
         self.earn_list = []
         self.total_usd = 0
+        self.add_coin = AddCoin()
+        self.list_coin = ListCoin(order_by="time_unix desc")
 
     def parse(self) -> None:
         resp_earn_active = self.account.get_earn_active()
@@ -29,11 +31,9 @@ class EarnAcc(BaseLogic):
         self.earn_list = earn_for_analize
 
     def _dicision_on_coin_history(self, ccy: str) -> bool:
-        coin_history = ListCoin(order_by="time_unix desc").execute({'ccy': ccy}, 10)
+        coin_history = self.list_coin.execute({'ccy': ccy}, 10)
         coin_per_result = float(coin_history[0]['usd'] / coin_history[-1]['usd'])
         
-        if coin_history[0]['usd'] > coin_history[-1]['usd']:
-            return False
         if coin_history[0]['usd'] < coin_history[-1]['usd'] and coin_per_result < 0.9:
             return True
         return False
@@ -42,7 +42,7 @@ class EarnAcc(BaseLogic):
         earn_for_sell = []
         for coin in self.earn_list:
             ticker = self.account.get_currency({'instId': f'{coin["ccy"]}-USDT'})
-            AddCoin().execute({
+            self.add_coin.execute({
                 'ccy': coin['ccy'],
                 'usd': ticker['data'][0]['bidPx'],
                 'time_unix': self.time_unix

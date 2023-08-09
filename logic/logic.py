@@ -18,6 +18,7 @@ class Logic:
 
     def earn_account(self):
         self.earn_acc.parse()
+        return
         earn_for_sell = self.earn_acc.dicision_making()
         if earn_for_sell != []:
             self.earn_acc.dicision_execution(earn_for_sell)
