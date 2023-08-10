@@ -18,6 +18,9 @@ class EarnAcc(BaseLogic):
         self.list_coin = ListCoin(order_by="time_unix desc")
 
     def parse(self) -> None:
+        """
+        Парсим текущие вложения
+        """
         resp_earn_active = self.account.get_earn_active()
         earn_for_analize = []
         for earn in resp_earn_active['data']:
@@ -31,6 +34,9 @@ class EarnAcc(BaseLogic):
         self.earn_list = earn_for_analize
 
     def _dicision_on_coin_history(self, ccy: str) -> bool:
+        """
+        Определяем, стоит ли выводить активы, основываясь на цене актива
+        """
         coin_history = self.list_coin.execute({'ccy': ccy}, 10)
         coin_per_result = float(coin_history[0]['usd'] / coin_history[-1]['usd'])
         
@@ -39,6 +45,9 @@ class EarnAcc(BaseLogic):
         return False
     
     def dicision_making(self) -> list:
+        """
+        Формирование списка активов, которые надо продать
+        """
         earn_for_sell = []
         for coin in self.earn_list:
             ticker = self.account.get_currency({'instId': f'{coin["ccy"]}-USDT'})
@@ -54,6 +63,9 @@ class EarnAcc(BaseLogic):
         return earn_for_sell
     
     def dicision_execution(self, earn_for_sell: list) -> None:
+        """
+        Функция вывода активов
+        """
         for coin in earn_for_sell:
             self.account.redeem_earn(
                 ord_id=coin['ordId'],
