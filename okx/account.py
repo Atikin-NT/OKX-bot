@@ -28,26 +28,37 @@ class Account(Client):
     def get_assert_valutation(self) -> any:
         return super().request_with_params(c.GET, c.ASSET_VALUATION, {'ccy': 'USDT'})
     
-    def estimate_convert(self, from_ccy, amount, to_ccy="USDT") -> any:
+    def estimate_convert(self, from_ccy, amount, to_ccy="USDT", side="sell", rfqSzCcy=None) -> any:
         params = {
             "baseCcy": from_ccy,
             "quoteCcy": to_ccy,
-            "side": "sell",
+            "side": side,
             "rfqSz": amount,
-            "rfqSzCcy": from_ccy
+            "rfqSzCcy": rfqSzCcy or from_ccy
         }
         return super().request_with_params(c.POST, c.ESTIMATE_QUOTE, params)
     
-    def trade_convert(self, from_ccy, amount, quote_id, to_ccy="USDT") -> any:
+    def trade_convert(self, from_ccy: str, amount: str, quote_id: str, to_ccy="USDT", side='sell', szCcy=None) -> any:
         params = {
             "baseCcy": from_ccy,
             "quoteCcy": to_ccy,
-            "side": "sell",
+            "side": side,
             "sz": amount,
-            "szCcy": from_ccy,
+            "szCcy": szCcy or from_ccy,
             "quoteId": quote_id
         }
         return super().request_with_params(c.POST, c.CONVERT_TRADE, params)
+
+    def purchase_earn(self, product_id: str, ccy: str, amount: str, term: str) -> any:
+        params = {
+            "productId": product_id,
+            "investData": {
+                "ccy": ccy,
+                "amt": amount
+            },
+            "term": term
+        }
+        return super().request_with_params(c.POST, c.STACK_DEFI_PURCHASE)
 
     def cancel_earn(self, ord_id: str, protocol_type: str) -> any:
         params = {

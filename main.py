@@ -13,8 +13,8 @@ passphrase = okx_config['passphrase']
 
 def main():
     parser = Logic(apikey, secretkey, passphrase)
-    # parser.funding_account()
-    parser.earn_account()
+    parser.funding_account()
+    # parser.earn_account()
     return
     with open("res.json", "w") as file:
         json.dump(response_json, file, indent=4, ensure_ascii=False)

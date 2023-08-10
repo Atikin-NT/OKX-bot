@@ -7,18 +7,18 @@ class Logic:
         self.earn_acc = EarnAcc(api_key, api_secret_key, passphrase)
 
     def funding_account(self):
-
         self.funding_acc.analize_earn_offers()
-        return
 
         self.funding_acc.parse()
 
         if self.funding_acc.dicision_making():
             self.funding_acc.dicision_execution()
 
+        self.funding_acc.choose_earn()
+
     def earn_account(self):
         self.earn_acc.parse()
-        return
+
         earn_for_sell = self.earn_acc.dicision_making()
         if earn_for_sell != []:
             self.earn_acc.dicision_execution(earn_for_sell)
