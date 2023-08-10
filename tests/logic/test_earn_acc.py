@@ -36,7 +36,23 @@ def test_parse_empty_three_coins():
 
 # ------------- dicision_making
 
-def test_dicision_making_sell():
+def test_dicision_making_coin_down():
+    earn_acc = EarnAcc("api_key", "secret_key", "passphrase")
+    earn_acc.earn_list = inject_test_data('dicision_earn_list.json')
+    earn_acc.account.get_currency = MagicMock()
+    earn_acc.account.get_currency.return_value = {'data':[{'bidPx':5}]}
+
+    earn_acc.add_coin.execute = MagicMock()
+    earn_acc.add_coin.execute.return_value = None
+
+    earn_acc.list_coin.execute = MagicMock()
+    earn_acc.list_coin.execute.return_value = inject_test_data('dicision_list_coin_down.json')
+
+    earn_for_sell = earn_acc.dicision_making()
+
+    assert earn_for_sell[0]['ccy'] == 'DOT'
+
+def test_dicision_making_coin_up():
     earn_acc = EarnAcc("api_key", "secret_key", "passphrase")
     earn_acc.earn_list = inject_test_data('dicision_earn_list.json')
     earn_acc.account.get_currency = MagicMock()
@@ -50,5 +66,20 @@ def test_dicision_making_sell():
 
     earn_for_sell = earn_acc.dicision_making()
 
-    assert earn_for_sell[0]['ccy'] == 'DOT'
-    
+    assert earn_for_sell == []
+
+def test_dicision_making_coin_const():
+    earn_acc = EarnAcc("api_key", "secret_key", "passphrase")
+    earn_acc.earn_list = inject_test_data('dicision_earn_list.json')
+    earn_acc.account.get_currency = MagicMock()
+    earn_acc.account.get_currency.return_value = {'data':[{'bidPx':5}]}
+
+    earn_acc.add_coin.execute = MagicMock()
+    earn_acc.add_coin.execute.return_value = None
+
+    earn_acc.list_coin.execute = MagicMock()
+    earn_acc.list_coin.execute.return_value = inject_test_data('dicision_list_coin_const.json')
+
+    earn_for_sell = earn_acc.dicision_making()
+
+    assert earn_for_sell == []
