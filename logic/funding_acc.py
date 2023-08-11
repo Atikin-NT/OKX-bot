@@ -55,6 +55,8 @@ class FundingAcc(BaseLogic):
             if estimate['code'] == "52914":
                 continue
 
+            time.sleep(1)
+
             quote_id = estimate['data'][0]['quoteId']
 
             convert_resp = self.account.trade_convert(coin, amount, quote_id)
